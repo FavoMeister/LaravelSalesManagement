@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('modules.users.index');
+    return view('modules.users.login');
+});
+
+Route::get('/index', function () {
+    return view('modules.index');
 });
 
 //Route::get('First-User', [UserController::class, 'FirstUser']);

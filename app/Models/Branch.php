@@ -16,5 +16,5 @@ class Branch extends Model
         'status',
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
 }

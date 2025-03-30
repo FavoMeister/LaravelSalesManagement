@@ -50,4 +50,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    // One to Many (Inverse)
+    public function branch(){
+        return $this->belongsTo('App\Models\Branch');
+    }
 }

@@ -17,4 +17,13 @@ class Branch extends Model
     ];
 
     public $timestamps = true;
+
+    /*
+     * Relationships
+     */
+
+    // One to Many
+    public function users(){
+        return $this->hasMany('App\Models\User');
+    }
 }

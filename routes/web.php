@@ -32,3 +32,5 @@ Route::get('mis-datos', function(){
     return view('modules.users.profile');
 });
 Route::post('mis-datos', [UserController::class, 'updateData']);
+Route::get('usuarios', [UserController::class, 'index']);
+Route::post('usuarios', [UserController::class, 'store']);

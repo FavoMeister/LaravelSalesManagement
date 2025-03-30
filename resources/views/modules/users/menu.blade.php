@@ -27,7 +27,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ url('users') }}">
+          <a href="{{ url('usuarios') }}">
             <i class="fa fa-users"></i> 
             <span>Usuarios</span>
           </a>

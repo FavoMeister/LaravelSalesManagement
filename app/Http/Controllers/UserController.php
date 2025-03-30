@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Branch;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if (!Auth::check() || Auth::user()->role != 'Administrator') {
+            return redirect('index');
+        }
+        //$users = User::orderBy('id', 'desc');
+        $users = User::all();
+        $branches = Branch::where('status', 1)->get();
+        //dd($users->first()->branch);
+                //->where('roles.id','!=',1)
+                //->paginate(10);
+
+        return view('modules.users.users')->with([
+            'users' => $users,
+            'branches' => $branches,
+        ]);
     }
 
     /**
@@ -54,7 +68,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $emailValidation = request()->validate([
+            'email' => ['unique:users']
+        ]);
+        $data = request();
+        if ($data['role'] != 'Administrator') {
+            # code...
+        } else {
+            # code...
+        }
+        
+
+        $user = new User($request->all());
+        $user->password = Hash::make($request->password);
+        //$user->branch_id = $request->branch_id;
+        //$enterprise=session('company');
+        //$branch->company_id=$enterprise->id;
+        $user->save();
+        return redirect('usuarios')->with('success', 'El usuario a sido creado correctamente');
     }
 
     /**

@@ -183,4 +183,23 @@ class UserController extends Controller
         }
         return redirect('mis-datos');
     }
+
+
+    public function changeStatus($user_id)
+    {
+        $user = User::find($user_id);
+        
+        if ($user != null) {
+            $user->status = $user->status == 1 ? 0 : 1;
+            $user->update();
+            return response()->json([
+                'user' => $user,
+            ]);
+            //return redirect('usuarios')->with('success', 'El estado del usuario {$user->name} ha sido actualizada correctamente');
+        } else {
+            return response()->json([
+                'user' => null,
+            ]);
+        }
+    }
 }

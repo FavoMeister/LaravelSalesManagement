@@ -39,13 +39,17 @@
                                             <img src="{{ url('storage/users/anonymous.png') }}" alt="" class="img-thumbnail" width="40px">
                                         @endif
                                     </td>
-                                    <td>{{ $user->branch->name }}</td>
+                                    <td>
+                                        @if ($user->role != 'Administrator')
+                                            {{ $user->branch->name }}    
+                                        @endif
+                                    </td>
                                     <td>{{ $user->role }}</td>
                                     <td>
                                         @if ($user->status)
-                                            <button class="btn btn-success btn-xs">Activo</button>
+                                            <button class="btn btn-success btn-xs btnUserStatus" uid="{{ $user->id }}">Activo</button>
                                         @else
-                                            <button class="btn btn-danger btn-xs">Inactivo</button>
+                                            <button class="btn btn-danger btn-xs btnUserStatus" uid="{{ $user->id }}">Inactivo</button>
                                         @endif
                                     </td>
                                     <td>{{ $user->last_login }}</td>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('modules.users.login');
-});
+})->name('Ingresar');
 
 Route::get('/index', function () {
     return view('modules.index');
@@ -34,3 +34,4 @@ Route::get('mis-datos', function(){
 Route::post('mis-datos', [UserController::class, 'updateData']);
 Route::get('usuarios', [UserController::class, 'index']);
 Route::post('usuarios', [UserController::class, 'store']);
+Route::get('cambiar-estado/{user_id}', [UserController::class, 'changeStatus']);

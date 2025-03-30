@@ -42,6 +42,9 @@
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
+            @if ($errors->has('estado'))
+                <div class="alert alert-danger">{{ $errors->first('estado') }}</div>
+            @endif
             <div class="row">
                 {{-- <div class="col-xs-8">
                 <div class="checkbox icheck">

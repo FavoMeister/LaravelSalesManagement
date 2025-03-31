@@ -19,8 +19,8 @@
                             <tr>
                                 <th style="width: 10px;">#</th>
                                 <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Foto</th>
+                                <th style="width: 255px;">Email</th>
+                                <th style="width: 35px;">Foto</th>
                                 <th>Sucursal</th>
                                 <th>Rol</th>
                                 <th>Estado</th>
@@ -60,11 +60,12 @@
                                             <button class="btn btn-warning btnEditUser" data-toggle="modal" data-target="#modalEditUser" userId="{{ $user->id }}" >
                                                 <i class="fa fa-pencil"></i>
                                             </button>
+                                            <button class="btn btn-danger btnDeleteUser" userId="{{ $user->id }}"><i class="fa fa-trash"></i></button>
                                         @endif
                                         
-                                        <a href="cambiar-estado-usuario/{{ $user->id }}">
+                                        {{-- <a href="cambiar-estado-usuario/{{ $user->id }}">
                                             <button class="btn btn-danger">{{ $user->status ? 'Deshabilitar' : 'Habilitar' }}</button>
-                                        </a>
+                                        </a> --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -111,7 +112,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                                <select name="role" id="" class="form-control input-lg selectRole">
+                                <select name="role" id="" class="form-control input-lg selectRole" required>
                                     <option value="">Seleccionar Rol</option>
                                     <option value="Administrator">Administrador</option>
                                     <option value="Manager">Encargado</option>
@@ -122,7 +123,7 @@
                         <div class="form-group selectBranch" style="display: none;">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                                <select name="branch_id" id="" class="form-control input-lg">
+                                <select name="branch_id" id="branch_id" class="form-control input-lg" required>
                                     <option value="0">Seleccionar Sucursal</option>
                                     @foreach ($branches as $branch)
                                         <option value="{{ $branch->id }}">{{ $branch->name }}</option>

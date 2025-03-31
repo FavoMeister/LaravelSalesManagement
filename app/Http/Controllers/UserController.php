@@ -69,7 +69,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $emailValidation = request()->validate([
-            'email' => ['unique:users']
+            'email' => ['unique:users'],
+            'branch_id' => 'required|exists:branches,id',
         ]);
         $data = request();
         if ($data['role'] != 'Administrator') {
@@ -152,9 +153,19 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if ($user != null) {
+            if ($user->photo != '') {
+                $path = storage_path('app/public/' . $user->photo);
+                unlink($path);
+            }
+            User::destroy($id);
+            return redirect('usuarios')->with('success', 'El usuario ha sido eliminado correctamente.');
+        } else {
+            return redirect('index')->with('error', 'Usuario no encontrado');
+        }
     }
 
     public function updateData(Request $request)

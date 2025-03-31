@@ -112,3 +112,23 @@ $('.modal#modalEditUser').on('hidden.bs.modal', function(e){
     $('.alert').remove();
     $('#frm_edit_user')[0].reset();
 });
+
+$('.table').on('click', '.btnDeleteUser', function(){
+    var userId = $(this).attr('userId');
+
+    Swal.fire({
+        title: '¿Seguro qué quiere eleiminar el Usuario?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#d33',
+        confrimButtonText: 'Eliminar',
+        confirmButtonColor: '#3085d6'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location = 'eliminar-usuario/' + userId;
+        } else {
+            
+        }
+    });
+});

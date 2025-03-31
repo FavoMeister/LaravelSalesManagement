@@ -38,3 +38,4 @@ Route::get('cambiar-estado/{user_id}', [UserController::class, 'changeStatus']);
 Route::get('editar-usuario/{user_id}', [UserController::class, 'edit']);
 Route::post('verificar-email', [UserController::class, 'verifyUser']);
 Route::put('actualizar-usuario', [UserController::class, 'update']);
+Route::get('eliminar-usuario/{user_id}', [UserController::class, 'destroy']);

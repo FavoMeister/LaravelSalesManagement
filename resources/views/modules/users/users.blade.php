@@ -5,7 +5,9 @@
         <section class="content-header">
             <h1>Gestor de Usuarios</h1>
         </section>
-
+        @error('password')
+            <div class="alert alert-danger mt-2">{{ $message }}</div>
+        @enderror
         <section class="content">
             <div class="box">
                 <div class="box-header with-border">
@@ -55,12 +57,12 @@
                                     <td>{{ $user->last_login }}</td>
                                     <td>
                                         @if ($user->status)
-                                            <button class="btn btn-warning btnEditBranch" data-toggle="modal" data-target="#modalEditBranch" branchId="{{ $user->id }}" >
+                                            <button class="btn btn-warning btnEditUser" data-toggle="modal" data-target="#modalEditUser" userId="{{ $user->id }}" >
                                                 <i class="fa fa-pencil"></i>
                                             </button>
                                         @endif
                                         
-                                        <a href="cambiar-estado-sucursal/{{ $user->id }}">
+                                        <a href="cambiar-estado-usuario/{{ $user->id }}">
                                             <button class="btn btn-danger">{{ $user->status ? 'Deshabilitar' : 'Habilitar' }}</button>
                                         </a>
                                     </td>
@@ -132,6 +134,76 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                         <button type="submit" class="btn btn-primary">Crear Usuario</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEditUser">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ url('actualizar-usuario') }}" method="POST" id="frm_edit_user">
+                    @csrf
+                    @method('put')
+                    <div class="modal-header" style="background: #ffc107; color: black;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Editar Usuario</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" name="name" id="editName" placeholder="Ingresar el nombre del Usuario" class="form-control input-lg" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@</span>
+                                <input type="email" name="email" id="editEmail" placeholder="Ingresar el email del Usuario" class="form-control input-lg" required>
+                                <input type="hidden" name="id" id="idEdit" class="form-control input-lg" required>
+                            </div>
+                            @error('email')
+                                <p class="alert alert-danger">El Email ya se encuentra registrado!</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" name="password" id="editPassword" placeholder="Nueva contraseña del Usuario" class="form-control input-lg">
+                            </div>
+                            @error('password')
+                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                <select name="role" id="editRole" class="form-control input-lg selectRole">
+                                    <option value="">Seleccionar Rol</option>
+                                    <option value="Administrator">Administrador</option>
+                                    <option value="Manager">Encargado</option>
+                                    <option value="Seller">Vendedor</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group selectBranch" style="display: none;">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-building"></i></span>
+                                <select name="branch_id" id="editBranchId" class="form-control input-lg">
+                                    <option value="0">Seleccionar Sucursal</option>
+                                    @foreach ($branches as $branch)
+                                        <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Editar Usuario</button>
                     </div>
                 </form>
             </div>

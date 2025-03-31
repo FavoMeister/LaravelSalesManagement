@@ -35,3 +35,6 @@ Route::post('mis-datos', [UserController::class, 'updateData']);
 Route::get('usuarios', [UserController::class, 'index']);
 Route::post('usuarios', [UserController::class, 'store']);
 Route::get('cambiar-estado/{user_id}', [UserController::class, 'changeStatus']);
+Route::get('editar-usuario/{user_id}', [UserController::class, 'edit']);
+Route::post('verificar-email', [UserController::class, 'verifyUser']);
+Route::put('actualizar-usuario', [UserController::class, 'update']);

@@ -101,15 +101,52 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        
+        if($user != null){
+                return response()->json([
+                    'user' => $user,
+                ]);
+        }else{
+            /*flash('No se ha encontrado el registro en la base de datos. Intenta nuevamente.')
+                ->error()
+                ->important();*/
+
+            return redirect()
+                ->route('index');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        if (!empty($request->password)) {
+            $validatePass = request()->validate([
+                'password' => ["string", "min:8"]
+            ]);
+            $password = true;
+        }else {
+            $password = false;
+        }
+        $user = User::find($request->id);
+        if ($user != null) {
+            if($request->role != 'Aministrator'){
+
+            }
+            
+            if ($password) {
+                $user->fill($request->all());
+                $user->password = Hash::make($request->password);
+            }else {
+                $user->fill($request->except('password'));
+            }
+            $user->save();
+            return redirect('usuarios')->with('success', 'El usuario ha sido actualizado correctamente.');
+        } else {
+            return redirect('index')->with('error', 'Usuario no encontrado');
+        }
     }
 
     /**
@@ -201,5 +238,27 @@ class UserController extends Controller
                 'user' => null,
             ]);
         }
+    }
+
+    public function verifyUser(Request $request)
+    {
+        $user = User::find($request->id);
+        //dd(User::where('email', $request->email)->exists());
+        //dd($request->email != $user['email'], $request->email, $user['email']);
+        if ($request->email != $user['email']) {
+            $existingEmail = User::where('email', $request->email)->exists();
+            //dd($existingEmail);
+            if (!$existingEmail) {
+                $verification = false;
+            }else {
+                $verification = true;
+            }
+        }else {
+            $verification = true;
+        }
+
+        return response()->json([
+            'verification' => $verification,
+        ]);
     }
 }

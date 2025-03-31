@@ -40,19 +40,19 @@
         </li>
         
         <li>
-          <a href="{{ url('categories') }}">
+          <a href="{{ url('categorias') }}">
             <i class="fa fa-home"></i> 
             <span>Catgorías</span>
           </a>
         </li>
         <li>
-          <a href="{{ url('products') }}">
+          <a href="{{ url('productos') }}">
             <i class="fa fa-cubes"></i> 
             <span>Productos</span>
           </a>
         </li>
         <li>
-          <a href="{{ url('clients') }}">
+          <a href="{{ url('clientes') }}">
             <i class="fa fa-user-plus"></i> 
             <span>Clientes</span>
           </a>

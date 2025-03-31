@@ -9,7 +9,7 @@
         <section class="content">
             <div class="box">
                 <div class="box-header with-border">
-                    <button class="btn btn-primary">Agregar Sucursal</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalcreateBranch">Agregar Sucursal</button>
                 </div>
                 <div class="box-body">
 

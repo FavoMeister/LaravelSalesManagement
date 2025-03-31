@@ -825,6 +825,7 @@
     
     <script src="{{ url('js/plantilla.js') }}"></script>
     <script src="{{ url('js/users.js') }}"></script>
+    <script src="{{ url('js/products.js') }}"></script>
     @if (session('success'))
       <script type="text/javascript">
         Swal.fire({

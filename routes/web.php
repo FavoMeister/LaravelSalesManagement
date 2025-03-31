@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +29,7 @@ Route::put('actualizar-sucursal', [BranchController::class, 'update']);
 Route::get('cambiar-estado-sucursal/{branch_id}', [BranchController::class, 'changeStatus']);
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Ussers
+// Users
 Route::get('mis-datos', function(){
     return view('modules.users.profile');
 });
@@ -39,3 +41,10 @@ Route::get('editar-usuario/{user_id}', [UserController::class, 'edit']);
 Route::post('verificar-email', [UserController::class, 'verifyUser']);
 Route::put('actualizar-usuario', [UserController::class, 'update']);
 Route::get('eliminar-usuario/{user_id}', [UserController::class, 'destroy']);
+
+// Categories
+Route::get('categorias', [CategoryController::class, 'index'])->name('categorias');
+Route::post('categorias', [CategoryController::class, 'store']);
+Route::get('editar-categoria/{category_id}', [CategoryController::class, 'edit']);
+Route::put('actualizar-categoria', [CategoryController::class, 'update']);
+Route::get('eliminar-categoria/{category_id}', [CategoryController::class, 'destroy']);

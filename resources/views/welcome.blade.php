@@ -31,6 +31,9 @@
     <!-- Data Tables -->
     <link rel="stylesheet" href="{{ url('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('bower_components/datatables.net-bs/css/responsive.bootstrap.min.css') }}">
+
+    <!-- ICheck -->
+    <link rel="stylesheet" href="{{ url('bower_components/iCheck/all.css') }}">
   
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -822,6 +825,9 @@
 
     {{-- SweetAlert2 --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <!-- ICheck -->
+     <script src="{{ url('bower_components/iCheck/icheck.min.js') }}"></script>
     
     <script src="{{ url('js/plantilla.js') }}"></script>
     <script src="{{ url('js/users.js') }}"></script>

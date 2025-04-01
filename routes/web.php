@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
@@ -48,3 +49,7 @@ Route::post('categorias', [CategoryController::class, 'store']);
 Route::get('editar-categoria/{category_id}', [CategoryController::class, 'edit']);
 Route::put('actualizar-categoria', [CategoryController::class, 'update']);
 Route::get('eliminar-categoria/{category_id}', [CategoryController::class, 'destroy']);
+
+//Products
+Route::get('productos', [ProductsController::class, 'index']);
+Route::get('generar/codigo/producto/{category_id}', [ProductsController::class, 'generateCode']);

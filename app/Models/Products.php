@@ -17,7 +17,6 @@ class Products extends Model
         'code',
         'description',
         'stock',
-        'code',
         'purchase_price',
         'selling_price',
         'image',
@@ -30,5 +29,10 @@ class Products extends Model
 
     /*
      * Relationships
-     */
+    */
+
+    // One to Many (Inverse)
+    public function category(){
+        return $this->belongsTo('App\Models\Category');
+    }
 }

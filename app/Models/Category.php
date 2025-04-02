@@ -20,5 +20,10 @@ class Category extends Model
 
     /*
      * Relationships
-     */
+    */
+
+    // One to Many
+    public function products(){
+        return $this->hasMany('App\Models\Products');
+    }
 }

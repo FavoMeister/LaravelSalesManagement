@@ -65,10 +65,11 @@ $('#category_id').change(function(){
         //$('#modal_edit_network').modal('hide');
         //console.log(response);
         let newCode = "";
-        if (response.product.length == 0) {
-            newCode = generateCode("categoryName", categoryId);
+        if (!response.product || Object.keys(response.product).length === 0) {
+            newCode = generateCode(categoryName, categoryId);
         } else {
-            newCode = Number(response.product.code, response.product.code);
+            
+            newCode = incrementCode(response.product.code);
         }
         $("#productCode").val(newCode);
     }).fail(function (jqXHR, textStatus, errorThrown){
@@ -76,13 +77,17 @@ $('#category_id').change(function(){
     });
 });
 
-$('.modal#modalEditUser').on('show.bs.modal', function(e){
+$('.modal#modalEditProduct').on('show.bs.modal', function(e){
     $('.alert').remove();
-    $('#frm_edit_user')[0].reset();
+    $('#frm_edit_product')[0].reset();
+    $('#editPercentageValue').val(40);
+    $("#editSellingPrice").prop("readonly", true);
 });
-$('.modal#modalEditUser').on('hidden.bs.modal', function(e){
+$('.modal#modalEditProduct').on('hidden.bs.modal', function(e){
     $('.alert').remove();
-    $('#frm_edit_user')[0].reset();
+    $('#frm_edit_product')[0].reset();
+    $('#editPercentageValue').val(40);
+    $("#editSellingPrice").prop("readonly", true);
 });
 function generateCode(product, lastNumber) {
     let midName = product.replace(/\s+/g, '').substring(0, 3).toUpperCase();
@@ -91,7 +96,27 @@ function generateCode(product, lastNumber) {
 
     return `${midName}-${numberTwo}`;
 }
+function incrementCode(code) {
+    // Verify the correct format (ej: "COM-01")
+    if (!code || typeof code !== 'string' || !code.includes('-')) {
+        console.error("Formato de código inválido:", code);
+        return code; // Returns the original if it doesn't comply with the format
+    }
 
+    // Separate the prefix (ej: "COM") and the number (ej: "01")
+    const parts = code.split('-');
+    const prefix = parts[0]; // "COM"
+    const numberStr = parts[1]; // "01"
+
+    // convert number to integer
+    const number = parseInt(numberStr, 10) + 1;
+
+    // Left zeros (ej: 2 → "02")
+    const paddedNumber = number.toString().padStart(numberStr.length, '0');
+
+    // Returns the new code (ej: "COM-02")
+    return `${prefix}-${paddedNumber}`;
+}
 $("input[type='checkbox'].minimal").iCheck({
     checkboxClass: 'icheckbox_minimal-blue'
 });
@@ -136,4 +161,110 @@ $(".percentage").on("ifChecked", function(){
 
     $("#sellingPrice").val(percentage);
     $("#sellingPrice").prop("readonly", true);
+});
+
+$('.table').on('click', '.btnEditProduct', function(){
+    var productId = $(this).attr('productId');
+
+    var urlGet = 'editar/producto/PRODUCTID';
+    urlGet = urlGet.replace('PRODUCTID', productId);
+    
+    $.ajax({
+        url: urlGet,
+        method: 'GET',
+        dataType: 'JSON',
+        beforeSend: function(e){
+            
+        }
+    }).done(function (response){
+        //console.log(response.product);
+        $('#idEdit').val(response.product.id);
+        $('#editName').val(response.product.name);
+        $('#editCategoryId').val(response.product.category_id);
+        $('#editProductCode').val(response.product.code);
+        $('#editDescription').val(response.product.description);
+        $('#editStock').val(response.product.stock);
+        $('#editPurchasePrice').val(response.product.purchase_price);
+        $('#editSellingPrice').val(response.product.selling_price);
+
+        if (response.product.image != '') {
+            $('#editImage').attr('src', 'storage/' + response.product.image);
+        } else {
+            $('#editImage').attr('src', 'storage/products/default.png');
+        }
+        
+    }.bind(this));
+});
+
+$('#editCategoryId').change(function(){
+    var categoryId = $(this).val();
+    var categoryName = $(this).find('option:selected').text();
+
+    var urlGet = 'generar/codigo/producto/CATEGORYID';
+    urlGet = urlGet.replace('CATEGORYID', categoryId);
+
+    $('.alert').remove();
+    $.ajax({
+        url: urlGet,
+        headers: { 
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token dinámico
+        },
+        method: 'Get',
+        dataType: 'JSON',
+        beforeSend: function(e){
+            
+        }
+    }).done(function (response){
+        let newCode = "";
+        if (!response.product || Object.keys(response.product).length === 0) {
+            newCode = generateCode(categoryName, categoryId);
+        } else {
+            newCode = incrementCode(response.product.code);
+        }
+        $("#editProductCode").val(newCode);
+    }).fail(function (jqXHR, textStatus, errorThrown){
+        console.error("Error en AJAX:", textStatus, errorThrown);
+    });
+});
+
+$("#editPurchasePrice").change(function(){
+    
+    if ($(".editPercentage").prop("checked")) {
+
+        let editPercentageValue = $("#editPercentageValue").val();
+
+        let editPercentage = Number(($("#editPurchasePrice").val() * editPercentageValue / 100)) + Number($("#editPurchasePrice").val());
+
+        $("#editSellingPrice").val(editPercentage);
+        $("#editSellingPrice").prop("readonly", true);
+
+    } else {
+        
+    }
+});
+
+$("#editPercentageValue").change(function(){
+    if ($(".editPercentage").prop("checked")) {
+
+        let editPercentageValue = $("#editPercentageValue").val();
+        
+        let editPercentage = Number(($("#editPurchasePrice").val() * editPercentageValue / 100)) + Number($("#editPurchasePrice").val());
+
+        $("#editSellingPrice").val(editPercentage);
+        $("#editSellingPrice").prop("readonly", true);
+
+    }
+});
+
+$(".editPercentage").on("ifUnchecked", function(){
+    $("#editSellingPrice").prop("readonly", false);
+});
+
+$(".editPercentage").on("ifChecked", function(){
+    let editPercentageValue = $("#editPercentageValue").val();
+
+    let editPercentage = Number(($("#editPurchasePrice").val() * editPercentageValue / 100)) + Number($("#editPurchasePrice").val());
+
+    $("#editSellingPrice").val(editPercentage);
+    $("#editSellingPrice").prop("readonly", true);
 });

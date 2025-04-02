@@ -57,7 +57,7 @@ class CategoryController extends Controller
         //$enterprise=session('company');
         //$branch->company_id=$enterprise->id;
         //$category->save();
-        return redirect('categorias')->with('success', 'La categoría a sido agregada correctamente');
+        return redirect('categorias')->with('success', 'La categoría ha sido agregada correctamente');
     }
 
     /**

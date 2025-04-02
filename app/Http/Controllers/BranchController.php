@@ -55,7 +55,7 @@ class BranchController extends Controller
         //$enterprise=session('company');
         //$branch->company_id=$enterprise->id;
         $branch->save();
-        return redirect('branches')->with('success', 'La sucursal a sido agregada correctamente');
+        return redirect('branches')->with('success', 'La sucursal ha sido agregada correctamente');
     }
 
     /**

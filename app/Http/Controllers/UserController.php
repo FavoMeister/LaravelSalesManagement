@@ -86,7 +86,7 @@ class UserController extends Controller
         //$enterprise=session('company');
         //$branch->company_id=$enterprise->id;
         $user->save();
-        return redirect('usuarios')->with('success', 'El usuario a sido creado correctamente');
+        return redirect('usuarios')->with('success', 'El usuario ha sido creado correctamente');
     }
 
     /**

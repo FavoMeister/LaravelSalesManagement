@@ -25,7 +25,7 @@ $('.table').on('click', '.btnDeleteCategory', function(){
     var categoryName = $(this).attr('categoryName');
 
     Swal.fire({
-        title: '¿Seguro qué quiere eleiminar la Categoría: ' + categoryName + '?',
+        title: '¿Seguro qué quiere eliminar la Categoría: ' + categoryName + '?',
         icon: 'warning',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
@@ -267,4 +267,26 @@ $(".editPercentage").on("ifChecked", function(){
 
     $("#editSellingPrice").val(editPercentage);
     $("#editSellingPrice").prop("readonly", true);
+});
+
+// Delete
+$('.table').on('click', '.btnDeleteProduct', function(){
+    var productId = $(this).attr('productId');
+    var productName = $(this).attr('productName');
+
+    Swal.fire({
+        title: '¿Seguro qué quiere eliminar el producto: ' + productName + '?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#d33',
+        confrimButtonText: 'Eliminar',
+        confirmButtonColor: '#3085d6'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location = 'eliminar/producto/' + productId;
+        } else {
+            
+        }
+    });
 });

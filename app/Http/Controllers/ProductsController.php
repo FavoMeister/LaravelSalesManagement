@@ -145,9 +145,22 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Products $products)
+    public function destroy($id)
     {
-        //
+        try {
+            $product = Products::findOrFail($id);
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+            $product->delete();
+            return redirect()
+               ->route('productos')
+               ->with('success', 'producto eliminado correctamente');
+        } catch (ModelNotFoundException $e) {
+            return redirect()
+               ->route('productos')
+               ->with('error', 'El producto no existe o ya fue eliminado');
+        }
     }
 
 

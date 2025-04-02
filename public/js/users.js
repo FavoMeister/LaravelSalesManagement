@@ -117,7 +117,7 @@ $('.table').on('click', '.btnDeleteUser', function(){
     var userId = $(this).attr('userId');
 
     Swal.fire({
-        title: '¿Seguro qué quiere eleiminar el Usuario?',
+        title: '¿Seguro qué quiere eliminar el Usuario?',
         icon: 'warning',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',

@@ -51,8 +51,9 @@ Route::put('actualizar-categoria', [CategoryController::class, 'update']);
 Route::get('eliminar-categoria/{category_id}', [CategoryController::class, 'destroy']);
 
 //Products
-Route::get('productos', [ProductsController::class, 'index']);
+Route::get('productos', [ProductsController::class, 'index'])->name('productos');
 Route::get('generar/codigo/producto/{category_id}', [ProductsController::class, 'generateCode']);
 Route::post("productos", [ProductsController::class, "store"]);
 Route::get('editar/producto/{product_id}', [ProductsController::class, 'edit']);
 Route::put('actualizar/producto', [ProductsController::class , 'update']);
+Route::get('eliminar/producto/{product_id}', [ProductsController::class, 'destroy']);

@@ -15,7 +15,7 @@
                     <table class="table table-bordered table-striped table-hover dt-responsive">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th style="width: 10px;">#</th>
                                 <th>Nombre</th>
                                 <th>Acciones</th>
                             </tr>
@@ -89,7 +89,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                                <span class="input-group-addon pull-left"><i class="fa fa-th"></i></span>
                                 <input type="text" name="name" id="editName" placeholder="Nombre" class="form-control input-lg" required>
                                 <input type="hidden" name="id" id="idEdit" class="form-control input-lg" required>
                             </div>

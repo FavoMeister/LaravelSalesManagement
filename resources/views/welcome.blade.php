@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ url('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('bower_components/datatables.net-bs/css/responsive.bootstrap.min.css') }}">
 
-    <!-- ICheck -->
+    <!-- iCheck -->
     <link rel="stylesheet" href="{{ url('bower_components/iCheck/all.css') }}">
   
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -42,12 +42,18 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+      <!-- Google Font -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
       <!-- jQuery 3 -->
       <script src="{{ url('bower_components/jquery/dist/jquery.min.js') }}"></script>
       <!-- jQuery UI 1.11.4 -->
       <script src="{{ url('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
+
+      <!-- InputMask -->
+      <script src="{{ url('bower_components/input-mask/jquery.inputmask.js') }}"></script>
+      <script src="{{ url('bower_components/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
+      <script src="{{ url('bower_components/input-mask/jquery.inputmask.extensions.js') }}"></script>
+
   </head>
   <body class="hold-transition skin-blue sidebar-mini login-page">
 
@@ -826,12 +832,14 @@
     {{-- SweetAlert2 --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-     <!-- ICheck -->
+     <!-- iCheck -->
      <script src="{{ url('bower_components/iCheck/icheck.min.js') }}"></script>
     
     <script src="{{ url('js/plantilla.js') }}"></script>
     <script src="{{ url('js/users.js') }}"></script>
     <script src="{{ url('js/products.js') }}"></script>
+    <script src="{{ url('js/clients.js') }}"></script>
+
     @if (session('success'))
       <script type="text/javascript">
         Swal.fire({

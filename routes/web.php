@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\Route as RoutingRoute;
@@ -57,3 +58,11 @@ Route::post("productos", [ProductsController::class, "store"]);
 Route::get('editar/producto/{product_id}', [ProductsController::class, 'edit']);
 Route::put('actualizar/producto', [ProductsController::class , 'update']);
 Route::get('eliminar/producto/{product_id}', [ProductsController::class, 'destroy']);
+
+// Clients
+Route::get('clientes', [ClientController::class, 'index'])->name('clientes');
+Route::post('clientes', [ClientController::class, 'store']);
+Route::post('verificar/doc', [ClientController::class, 'documentValidation']);
+Route::get('editar-cliente/{clientId}', [ClientController::class, 'edit']);
+Route::put('actualizar-cliente', [ClientController::class, 'update']);
+Route::get('eliminar/cliente/{clientId}', [ClientController::class, 'destroy']);

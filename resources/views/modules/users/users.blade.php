@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
                         <button type="submit" class="btn btn-primary">Crear Usuario</button>
                     </div>
                 </form>

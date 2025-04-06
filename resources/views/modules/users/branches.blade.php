@@ -15,7 +15,7 @@
                     <table class="table table-bordered table-striped table-hover dt-responsive">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th style="width: 10px;">#</th>
                                 <th>Sucursal</th>
                                 <th>Acciones</th>
                             </tr>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
                         <button type="submit" class="btn btn-primary">Agregar Sucursal</button>
                     </div>
                 </form>

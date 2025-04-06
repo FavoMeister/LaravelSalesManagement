@@ -26,4 +26,9 @@ class Client extends Model
     /*
      * Relationships
     */
+
+    // One to Many
+    public function sales(){
+        return $this->hasMany('App\Models\Sale');
+    }
 }

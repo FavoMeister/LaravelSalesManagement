@@ -58,13 +58,13 @@
           </a>
         </li>
         <li>
-          <a href="{{ url('sales') }}">
+          <a href="{{ url('ventas') }}">
             <i class="fa fa-shopping-cart"></i> 
             <span>Administrar Ventas</span>
           </a>
         </li>
         <li>
-          <a href="{{ url('reports') }}">
+          <a href="{{ url('reportes') }}">
             <i class="fa fa-bar-chart"></i> 
             <span>Reportes de Ventas</span>
           </a>

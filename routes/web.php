@@ -4,6 +4,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
@@ -66,3 +67,7 @@ Route::post('verificar/doc', [ClientController::class, 'documentValidation']);
 Route::get('editar-cliente/{clientId}', [ClientController::class, 'edit']);
 Route::put('actualizar-cliente', [ClientController::class, 'update']);
 Route::get('eliminar/cliente/{clientId}', [ClientController::class, 'destroy']);
+
+// Sales
+Route::get('ventas', [SaleController::class, 'index'])->name('ventas');
+Route::post('ventas', [SaleController::class, 'store']);

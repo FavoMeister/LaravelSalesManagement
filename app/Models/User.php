@@ -56,4 +56,9 @@ class User extends Authenticatable
     public function branch(){
         return $this->belongsTo('App\Models\Branch');
     }
+
+    // One to Many
+    public function sales(){
+        return $this->hasMany('App\Models\Sale', 'seller_id');
+    }
 }

@@ -26,4 +26,9 @@ class Branch extends Model
     public function users(){
         return $this->hasMany('App\Models\User');
     }
+
+     // One to Many
+     public function sales(){
+        return $this->hasMany('App\Models\Sale');
+    }
 }

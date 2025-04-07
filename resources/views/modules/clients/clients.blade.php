@@ -22,7 +22,7 @@
                                 <th>Teléfono</th>
                                 <th>Dirección</th>
                                 <th>Total Compras</th>
-                                <th>Total Ventas</th>
+                                <th>Última Compra</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -35,8 +35,8 @@
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->phone }}</td>
                                     <td>{{ $client->direction }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $client->purchase_count }}</td>
+                                    <td>{{ $client->last_sale }}</td>
                                     <td>
                                         @if ($client->status)
                                             <button class="btn btn-warning btnEditClient" data-toggle="modal" data-target="#modalEditClient" clientId="{{ $client->id }}" >

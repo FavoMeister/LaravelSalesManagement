@@ -27,12 +27,27 @@ class ClientController extends Controller
         if (!Auth::check() || Auth::user()->role != 'Administrator') {
             return redirect('index');
         }
-        $clients = Client::orderBy('id', 'desc')->get();
-        //$categories = Category::all();
-        //dd($users->first()->branch);
-                //->where('roles.id','!=',1)
-                //->paginate(10);
+        //$clients = Client::orderBy('id', 'desc')->get();
+        /*$clients = Client::where('clients.status', 1)->leftJoin('sales', 'sales.client_id', 'clients.id')
+        ->select('clients.id', 'clients.name', 'clients.phone', 'clients.document', 'clients.direction', 'clients.status', 'clients.email', \DB::raw('MAX(sales.sale_date) as last_sale'))
+        ->groupBy('clients.id', 'clients.name', 'clients.phone', 'clients.document', 'clients.direction', 'clients.status', 'clients.email')
+        ->get();*/
 
+        $clients = Client::query()
+            ->active() // Scope for status = 1
+            ->withLastSale() // Scope personalize
+            ->withPurchaseCount()
+            ->orderByDesc('id')
+            ->get([
+                'id',
+                'name',
+                'phone',
+                'document',
+                'direction',
+                'status',
+                'email'
+            ]);
+        
         return view('modules.clients.clients')->with([
             'clients' => $clients,
         ]);

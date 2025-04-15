@@ -37,11 +37,17 @@ class Sale extends Model
 
     // One to Many (Inverse)
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'seller_id');
     }
 
     // One to Many (Inverse)
     public function client(){
         return $this->belongsTo('App\Models\Client');
+    }
+
+    // Many to Many
+    public function products() {
+        return $this->belongsToMany(Products::class, 'product_sales', 'sale_id', 'product_id')
+               ->withPivot('quantity', 'price', 'discount');
     }
 }

@@ -35,4 +35,10 @@ class Products extends Model
     public function category(){
         return $this->belongsTo('App\Models\Category');
     }
+
+    // Many to Many
+    public function sales() {
+        return $this->belongsToMany(Sale::class, 'product_sales', 'product_id', 'sale_id')
+               ->withPivot('quantity', 'price', 'discount');
+    }
 }

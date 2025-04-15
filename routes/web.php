@@ -71,3 +71,9 @@ Route::get('eliminar/cliente/{clientId}', [ClientController::class, 'destroy']);
 // Sales
 Route::get('ventas', [SaleController::class, 'index'])->name('ventas');
 Route::post('ventas', [SaleController::class, 'store']);
+Route::get('venta/{sale_id}', [SaleController::class, 'adminSale']);
+Route::post('agregar-producto-venta', [SaleController::class, 'addProductToSale']);
+Route::get('cargar-productos-venta/{sale_id}', [SaleController::class, 'loadProductSale']);
+Route::post('quitar-producto-venta', [SaleController::class, 'deleteProductSale']);
+Route::post("finalizar-venta", [SaleController::class, "endSale"]);
+Route::get("eliminar/venta/{sale_id}", [SaleController::class, "destroy"]);

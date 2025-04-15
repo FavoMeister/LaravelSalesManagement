@@ -16,13 +16,13 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px;">#</th>
-                                <th>Nombre</th>
-                                <th>Documento</th>
-                                <th>Email</th>
-                                <th>Teléfono</th>
-                                <th>Dirección</th>
-                                <th>Total Compras</th>
-                                <th>Total Ventas</th>
+                                <th>Código</th>
+                                <th>Cliente</th>
+                                <th>Vendedor</th>
+                                <th>Forma de <br> Pago</th>
+                                <th>Impuesto <br> Neto</th>
+                                <th>Total</th>
+                                <th>Fecha</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -30,19 +30,22 @@
                             @foreach ($sales as $sale)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $sale->name }}</td>
-                                    <td>{{ $sale->document }}</td>
-                                    <td>{{ $sale->email }}</td>
-                                    <td>{{ $sale->phone }}</td>
-                                    <td>{{ $sale->direction }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $sale->code }}</td>
+                                    <td>{{ $sale->client->name }}</td>
+                                    <td>{{ $sale->user->name }}</td>
+                                    <td>{{ $sale->payment_method }}</td>
+                                    <td>$ {{ number_format($sale->net_tax, 2, '.', ',') }}</td>
+                                    <td>$ {{ number_format($sale->total, 2, '.', ',') }}</td>
+                                    <td>{{ $sale->sale_date }}</td>
                                     <td>
-                                        @if ($sale->status)
-                                            <button class="btn btn-warning btnEditClient" data-toggle="modal" data-target="#modalEditSale" saleId="{{ $sale->id }}" >
+                                        <a href="{{ url('venta/'. $sale->id) }}">
+                                            <button class="btn btn-primary">Administrar</button>
+                                        </a>
+                                        @if ($sale->status != "Finalizada")
+                                            <button class="btn btn-warning btnEditSale" data-toggle="modal" data-target="#modalEditSale" saleId="{{ $sale->id }}" >
                                                 <i class="fa fa-pencil"></i>
                                             </button>
-                                            <button class="btn btn-danger btnDeleteSale" saleId="{{ $sale->id }}" saleName="{{ $sale->name }}"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-danger btnDeleteSale" saleId="{{ $sale->id }}" saleCode="{{ $sale->code }}"><i class="fa fa-trash"></i></button>
                                         @endif
                                         
                                         {{-- <a href="cambiar-estado-venta/{{ $sale->id }}">
@@ -108,18 +111,6 @@
                                         <option value="{{ $client->id }}">{{ $client->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                <input type="text" name="document" id="document" placeholder="Ingresar el documento del cliente" class="form-control input-lg" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                <input type="text" name="direction" id="direction" placeholder="Ingresar la dirección del cliente" class="form-control input-lg">
                             </div>
                         </div>
                     </div>

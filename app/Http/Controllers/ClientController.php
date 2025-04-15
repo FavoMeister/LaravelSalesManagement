@@ -35,7 +35,7 @@ class ClientController extends Controller
 
         $clients = Client::query()
             ->active() // Scope for status = 1
-            ->withLastSale() // Scope personalize
+            ->withLastSale() // Scope personalized
             ->withPurchaseCount()
             ->orderByDesc('id')
             ->get([

@@ -56,7 +56,7 @@
                                                     <td style="width: 50%">
                                                         <div class="input-group">
                                                             <input type="number" name="" id="newTaxSale" class="form-control input-lg" min="0" 
-                                                            value="{{ $sale->tax }}" @if($sale->status == 'Finallizada') readonly @endif placeholder="0" required>
+                                                            value="{{ $sale->tax }}" @if($sale->status == 'Finalizada') readonly @endif placeholder="0" required>
 
                                                             <input type="hidden" id="newNetPrice">
                                                         </div>

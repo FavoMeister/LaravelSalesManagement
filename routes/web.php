@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -16,13 +17,16 @@ Route::get('/', function () {
     return view('modules.users.login');
 })->name('Ingresar');
 
-Route::get('/index', function () {
+/* Route::get('/index', function () {
     return view('modules.index');
-});
+}); */
 
 //Route::get('First-User', [UserController::class, 'FirstUser']);
 
 Auth::routes();
+
+// Welcome
+Route::get('inicio', [WelcomeController::class, 'index'])->name('inicio');
 
 // Branches
 Route::get('branches', [BranchController::class, "index"]);
@@ -77,3 +81,6 @@ Route::get('cargar-productos-venta/{sale_id}', [SaleController::class, 'loadProd
 Route::post('quitar-producto-venta', [SaleController::class, 'deleteProductSale']);
 Route::post("finalizar-venta", [SaleController::class, "endSale"]);
 Route::get("eliminar/venta/{sale_id}", [SaleController::class, "destroy"]);
+Route::get("Factura/{sale_id}" , [SaleController::class, "createBill"]);
+
+

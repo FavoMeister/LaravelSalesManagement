@@ -7,18 +7,29 @@
         </section>
 
         <section class="content">
-            <div class="box">
-                <div class="box-header with-border">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalcreateBranch">Agregar Sucursal</button>
-                </div>
-                <div class="box-body">
-
-                </div>
+            <div class="row">
+                @include('modules.index.top-boxes')
             </div>
+
+            @if (auth()->user()->role != 'Seller')
+                <div class="row">
+                    <div class="col-lg-12">
+                        @include('modules.index.sale-chart')
+                    </div>
+                    <div class="col-lg-6">
+                        @include('modules.index.best-selling-products-chart')
+                    </div>
+                    <div class="col-lg-6">
+                        @include('modules.index.latest-products')
+                    </div>
+                </div>
+            @else
+            @include('modules.index.my-sales')
+            @endif
         </section>
     </div>
 
-    <div class="modal fade" id="modalAgregarSucursal">
+    {{-- <div class="modal fade" id="modalAgregarSucursal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form action="" method="POST">
@@ -44,5 +55,5 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

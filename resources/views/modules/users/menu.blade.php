@@ -21,23 +21,26 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="{{ url('index') }}">
+          <a href="{{ url('inicio') }}">
             <i class="fa fa-home"></i> 
             <span>Inicio</span>
           </a>
         </li>
-        <li>
-          <a href="{{ url('usuarios') }}">
-            <i class="fa fa-users"></i> 
-            <span>Usuarios</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ url('branches') }}">
-            <i class="fa fa-home"></i> 
-            <span>Sucursales</span>
-          </a>
-        </li>
+        @if (auth()->user()->role == 'Administrator')
+          <li>
+            <a href="{{ url('usuarios') }}">
+              <i class="fa fa-users"></i> 
+              <span>Usuarios</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url('branches') }}">
+              <i class="fa fa-home"></i> 
+              <span>Sucursales</span>
+            </a>
+          </li>
+        @endif
+        
         
         <li>
           <a href="{{ url('categorias') }}">
@@ -63,12 +66,14 @@
             <span>Administrar Ventas</span>
           </a>
         </li>
-        <li>
-          <a href="{{ url('reportes') }}">
-            <i class="fa fa-bar-chart"></i> 
-            <span>Reportes de Ventas</span>
-          </a>
-        </li>
+        @if (auth()->user()->role != 'Seller')
+          <li>
+            <a href="{{ url('reportes') }}">
+              <i class="fa fa-bar-chart"></i> 
+              <span>Reportes de Ventas</span>
+            </a>
+          </li>
+        @endif
       </ul>
     </section>
     <!-- /.sidebar -->
